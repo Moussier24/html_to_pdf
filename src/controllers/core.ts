@@ -16,6 +16,8 @@ const convertHtmlToPdf = async (
   let bodyHtml: string = req.body.body_html;
   let headerHtml: string = req.body.header_html;
   let footerHtml: string = req.body.footer_html;
+  let _config: string = req.body.config;
+  let config: object = _config ? JSON.parse(_config) : {};
 
   var options = {
     format: "Letter",
@@ -33,6 +35,7 @@ const convertHtmlToPdf = async (
       process.cwd(),
       "node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs"
     ),
+    ...config,
   };
   try {
     var createResult = pdf.create(bodyHtml, options);
