@@ -19,8 +19,8 @@ const convertHtmlToPdf = async (
 
   var options = {
     format: "Letter",
-    height: "650px",
-    width: "800px",
+    height: "1000px",
+    width: "1200px",
     header: {
       height: "90px",
       contents: headerHtml,
