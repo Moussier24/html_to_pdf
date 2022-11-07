@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { Promise } from "bluebird";
 var pdf = require("html-pdf");
+const path = require("path");
 
 const home = async (req: Request, res: Response, next: NextFunction) => {
   return res.status(200).json("Hello from there. Go to /api to use the api");
@@ -12,7 +13,6 @@ const convertHtmlToPdf = async (
   next: NextFunction
 ) => {
   // get the data from req.body
-  let fileData: string | null = null;
   let bodyHtml: string = req.body.body_html;
   let headerHtml: string = req.body.header_html;
   let footerHtml: string = req.body.footer_html;
@@ -29,6 +29,10 @@ const convertHtmlToPdf = async (
       height: "70px",
       contents: footerHtml,
     },
+    phantomPath: path.resolve(
+      process.cwd(),
+      "node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs"
+    ),
   };
   try {
     var createResult = pdf.create(bodyHtml, options);
