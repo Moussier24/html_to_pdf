@@ -2,6 +2,10 @@ import { Request, Response, NextFunction } from "express";
 import { Promise } from "bluebird";
 var pdf = require("html-pdf");
 
+const home = async (req: Request, res: Response, next: NextFunction) => {
+  return res.status(200).json("Hello from there. Go to /api to use the api");
+};
+
 const convertHtmlToPdf = async (
   req: Request,
   res: Response,
@@ -41,4 +45,4 @@ const convertHtmlToPdf = async (
   return res.status(400).json("something went wrong");
 };
 
-export default { convertHtmlToPdf };
+export default { convertHtmlToPdf, home };
