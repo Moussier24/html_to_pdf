@@ -2,15 +2,21 @@ import http from "http";
 import express, { Express } from "express";
 import morgan from "morgan";
 import routes from "./routes/core";
+var bodyParser = require("body-parser");
 
 const router: Express = express();
 
 /** Logging */
 router.use(morgan("dev"));
 /** Parse the request */
-router.use(express.urlencoded({ extended: false }));
-/** Takes care of JSON data */
-router.use(express.json());
+router.use(bodyParser.json({ limit: "50mb" }));
+router.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
 
 /** RULES OF OUR API */
 router.use((req, res, next) => {
