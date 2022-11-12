@@ -24,11 +24,11 @@ const convertHtmlToPdf = async (
     height: "1000px",
     width: "1200px",
     header: {
-      height: "90px",
+      height: headerHtml ? "90px" : "0px",
       contents: headerHtml,
     },
     footer: {
-      height: "70px",
+      height: footerHtml ? "70px" : "0px",
       contents: footerHtml,
     },
     phantomPath: path.resolve(
